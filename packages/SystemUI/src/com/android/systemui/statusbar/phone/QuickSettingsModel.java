@@ -676,6 +676,9 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
     @Override
     public void onLocationGpsStateChanged(boolean inUse, String description) {
         mLocationState.enabled = inUse;
+        mLocationState.iconId = inUse
+                ? R.drawable.ic_qs_gps_on
+                : R.drawable.ic_qs_gps_off;
         mLocationState.label = description;
         if (togglesContain(QuickSettings.GPS_TOGGLE))
             mLocationCallback.refreshView(mLocationTile, mLocationState);
@@ -1215,7 +1218,7 @@ class QuickSettingsModel implements BluetoothStateChangeCallback,
             }
             return tiles.contains(tile);
         }
-        
+
         return getDefaultTiles().contains(tile);
     }
     
