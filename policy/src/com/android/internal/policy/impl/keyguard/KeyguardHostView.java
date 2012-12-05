@@ -28,6 +28,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.UserInfo;
@@ -68,7 +69,8 @@ public class KeyguardHostView extends KeyguardViewBase {
     // Found in KeyguardAppWidgetPickActivity.java
     static final int APPWIDGET_HOST_ID = 0x4B455947;
 
-    private final int MAX_WIDGETS = 5;
+    private int MAX_WIDGETS;
+    private boolean mUnlimitedWidgets;
 
     private AppWidgetHost mAppWidgetHost;
     private AppWidgetManager mAppWidgetManager;
@@ -279,6 +281,15 @@ public class KeyguardHostView extends KeyguardViewBase {
         addWidgetsFromSettings();
         if (!shouldEnableAddWidget()) {
             mAppWidgetContainer.setAddWidgetEnabled(false);
+        mUnlimitedWidgets = Settings.System.getBoolean(getContext().getContentResolver(),
+                                  Settings.System.LOCKSCREEN_UNLIMITED_WIDGETS, false);
+        if (mUnlimitedWidgets) {
+            MAX_WIDGETS = numWidgets() + 1;
+        } else {
+            MAX_WIDGETS = 5;
+        }
+        if (numWidgets() >= MAX_WIDGETS) {
+            setAddWidgetEnabled(false);
         }
         checkAppWidgetConsistency();
         mSwitchPageRunnable.run();
@@ -377,6 +388,15 @@ public class KeyguardHostView extends KeyguardViewBase {
         public void onAddView(View v) {
             if (!shouldEnableAddWidget()) {
                 mAppWidgetContainer.setAddWidgetEnabled(false);
+            mUnlimitedWidgets = Settings.System.getBoolean(getContext().getContentResolver(),
+                                  Settings.System.LOCKSCREEN_UNLIMITED_WIDGETS, false);
+            if (mUnlimitedWidgets) {
+                MAX_WIDGETS = numWidgets() + 1;
+            } else {
+                MAX_WIDGETS = 5;
+            }
+            if (numWidgets() >= MAX_WIDGETS) {
+                setAddWidgetEnabled(false);
             }
         }
 
@@ -395,6 +415,16 @@ public class KeyguardHostView extends KeyguardViewBase {
         public void onRemoveViewAnimationCompleted() {
             if (shouldEnableAddWidget()) {
                 mAppWidgetContainer.setAddWidgetEnabled(true);
+
+            mUnlimitedWidgets = Settings.System.getBoolean(getContext().getContentResolver(),
+                                  Settings.System.LOCKSCREEN_UNLIMITED_WIDGETS, false);
+            if (mUnlimitedWidgets) {
+                MAX_WIDGETS = numWidgets() + 1;
+            } else {
+                MAX_WIDGETS = 5;
+            }
+            if (numWidgets() < MAX_WIDGETS) {
+                setAddWidgetEnabled(true);
             }
         }
     };
