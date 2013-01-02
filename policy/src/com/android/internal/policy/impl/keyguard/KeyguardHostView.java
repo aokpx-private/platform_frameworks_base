@@ -298,6 +298,7 @@ public class KeyguardHostView extends KeyguardViewBase {
 
         showPrimarySecurityScreen(false);
         updateSecurityViews();
+        minimizeChallengeIfNeeded();
     }
 
     private boolean shouldEnableAddWidget() {
@@ -913,6 +914,15 @@ public class KeyguardHostView extends KeyguardViewBase {
             mViewStateManager.showUsabilityHints();
         }
         requestFocus();
+        minimizeChallengeIfNeeded();
+    }
+
+    private void minimizeChallengeIfNeeded() {
+        if (Settings.System.getBoolean(getContext().getContentResolver(), Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE, false)) {
+            if (mSlidingChallengeLayout != null) {
+                mSlidingChallengeLayout.fadeOutChallenge();
+            }
+        }
     }
 
     @Override
