@@ -103,3 +103,5 @@ void ResourceIdCache::dump() {
     printf("Misses: %ld\n", mMisses);
     printf("(Collisions: %ld)\n", mCollisions);
 }
+
+}
