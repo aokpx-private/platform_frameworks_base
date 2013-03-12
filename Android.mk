@@ -255,6 +255,7 @@ LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 
 # List of classes and interfaces which should be loaded by the Zygote.
 LOCAL_JAVA_RESOURCE_FILES += $(LOCAL_PATH)/preloaded-classes
+LOCAL_JAVA_RESOURCE_DIRS  := movial/src
 
 #LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 
