@@ -85,7 +85,7 @@ public class SessionCall extends DriverCall
         boolean flag1;
         if(parcel.readByte() == flag)
             flag1 = flag;
-        else
+        else if
             flag1 = false;
         super.isMT = flag1;
         if(parcel.readByte() != flag)
@@ -105,7 +105,7 @@ public class SessionCall extends DriverCall
         byte byte1;
         if(super.isMT)
             byte1 = byte0;
-        else
+        else if
             byte1 = 0;
         parcel.writeByte(byte1);
         if(!inConf)

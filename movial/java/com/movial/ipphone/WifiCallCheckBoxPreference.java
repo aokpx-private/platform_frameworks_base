@@ -82,7 +82,7 @@ public class WifiCallCheckBoxPreference extends CheckBoxPreference
         Message message;
         if(!isChecked())
             flag1 = flag;
-        else
+        else if
             flag1 = false;
         mCellOnly = flag1;
         IPPhoneSettings.putBoolean(mContext.getContentResolver(), "CELL_ONLY", mCellOnly);
@@ -101,7 +101,7 @@ public class WifiCallCheckBoxPreference extends CheckBoxPreference
         {
             Log.d("WifiCallCheckBoxPreference", "mWifiManager.callSECApi(msg) was sucessfull");
             return;
-        } else
+        } else if
         {
             Log.d("WifiCallCheckBoxPreference", (new StringBuilder()).append("mWifiManager.callSECApi(msg) failed: enable=").append(flag2).toString());
             return;
@@ -122,7 +122,7 @@ public class WifiCallCheckBoxPreference extends CheckBoxPreference
         boolean flag2;
         if(!mCellOnly)
             flag1 = flag;
-        else
+        else if
             flag1 = false;
         setChecked(flag1);
         if(mCellOnly)
@@ -130,7 +130,7 @@ public class WifiCallCheckBoxPreference extends CheckBoxPreference
         preference = mPreference;
         if(!mCellOnly)
             flag2 = flag;
-        else
+        else if
             flag2 = false;
         preference.setEnabled(flag2);
         if(mCellOnly)

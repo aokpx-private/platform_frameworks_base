@@ -53,7 +53,7 @@ public class IPSMSDispatcher extends SMSDispatcher
             {
                 smsresponse = new SmsResponse(Serial, "test PDU", 20);
                 commandexception = CommandException.fromRilErrno(2);
-            } else
+            } else if
             {
                 smsresponse = new SmsResponse(Serial, "test PDU", 0);
                 commandexception = null;
@@ -140,7 +140,7 @@ public class IPSMSDispatcher extends SMSDispatcher
                     message2.obj = new AsyncResult(null, as[1], null);
                     message2.sendToTarget();
                     return;
-                } else
+                } else if
                 {
                     Message message1 = obtainMessage(1);
                     String as1[] = new String[2];
@@ -188,7 +188,7 @@ public class IPSMSDispatcher extends SMSDispatcher
         SmsMessage smsmessage;
         s = (String)asyncresult.result;
         smsmessage = SmsMessage.newFromCDS(s);
-        if(smsmessage == null) goto _L2; else goto _L1
+        if(smsmessage == null) goto _L2; else if goto _L1
 _L1:
         int i;
         int j;
@@ -200,10 +200,10 @@ _L1:
         k = 0;
         l = deliveryPendingList.size();
 _L7:
-        if(k >= l) goto _L2; else goto _L3
+        if(k >= l) goto _L2; else if goto _L3
 _L3:
         com.android.internal.telephony.SMSDispatcher.SmsTracker smstracker = (com.android.internal.telephony.SMSDispatcher.SmsTracker)deliveryPendingList.get(k);
-        if(smstracker.mMessageRef != j) goto _L5; else goto _L4
+        if(smstracker.mMessageRef != j) goto _L5; else if goto _L4
 _L4:
         if(i >= 64 || i < 32)
             deliveryPendingList.remove(k);
@@ -221,7 +221,7 @@ _L2:
         return;
 _L5:
         k++;
-        if(true) goto _L7; else goto _L6
+        if(true) goto _L7; else if goto _L6
 _L6:
     }
 
@@ -284,7 +284,7 @@ _L1:
             Log.d("IPSMSDispatcher", (new StringBuilder()).append("Dispatching ").append(abyte0.length).append(" emergency SMS CB pdus").toString());
             dispatch(intent, "android.permission.RECEIVE_EMERGENCY_BROADCAST");
             return;
-        } else
+        } else if
         {
             Intent intent1 = new Intent("android.provider.Telephony.SMS_CB_RECEIVED");
             intent1.putExtra("pdus", abyte0);
@@ -297,7 +297,7 @@ _L1:
     public int dispatchMessage(SmsMessageBase smsmessagebase)
     {
         byte byte0 = 1;
-        if(smsmessagebase != null) goto _L2; else goto _L1
+        if(smsmessagebase != null) goto _L2; else if goto _L1
 _L1:
         Log.e("IPSMSDispatcher", "dispatchMessage: message is null");
         byte0 = 2;
@@ -321,7 +321,7 @@ _L2:
             Log.d("IPSMSDispatcher", "Received short message on device which doesn't support SMS service. Ignored.");
             return byte0;
         }
-        if(!ipsmsmessage.isMWISetMessage()) goto _L4; else goto _L3
+        if(!ipsmsmessage.isMWISetMessage()) goto _L4; else if goto _L3
 _L3:
         boolean flag1;
         updateMessageWaitingIndicator(-1);
@@ -330,9 +330,9 @@ _L6:
         if(!flag1)
             if(!mStorageMonitor.isStorageAvailable() && ipsmsmessage.getMessageClass() != android.telephony.SmsMessage.MessageClass.CLASS_0)
                 return 3;
-            else
+            else if
                 return dispatchNormalMessage(smsmessagebase);
-        if(true) goto _L5; else goto _L4
+        if(true) goto _L5; else if goto _L4
 _L4:
         boolean flag = ipsmsmessage.isMWIClearMessage();
         flag1 = false;
@@ -390,7 +390,7 @@ _L4:
             Log.d("IPSMSDispatcher", "Successfully wrote SMS-PP message to UICC");
             mCm.acknowledgeLastIncomingGsmSms(true, 0, null);
             return;
-        } else
+        } else if
         {
             Log.d("IPSMSDispatcher", "Failed to write SMS-PP message to UICC", asyncresult.exception);
             mCm.acknowledgeLastIncomingGsmSms(false, 255, null);
@@ -419,14 +419,14 @@ _L4:
         com.android.internal.telephony.gsm.SmsMessage.SubmitPdu submitpdu;
         if(pendingintent1 != null)
             flag = true;
-        else
+        else if
             flag = false;
         submitpdu = IPSmsMessage.getSubmitPdu(s1, s, i, abyte0, flag);
         if(submitpdu != null)
         {
             sendRawPdu(SmsTrackerFactory(SmsTrackerMapFactory(s, s1, i, abyte0, submitpdu), pendingintent, pendingintent1, getFormat()));
             return;
-        } else
+        } else if
         {
             Log.e("IPSMSDispatcher", "GsmSMSDispatcher.sendData(): getSubmitPdu() returned null");
             return;
@@ -488,7 +488,7 @@ _L4:
             String s4;
             if(pendingintent1 != null)
                 flag = true;
-            else
+            else if
                 flag = false;
             submitpdu = SmsMessage.getSubmitPdu(s1, s, s3, flag, SmsHeader.toByteArray(smsheader), l, smsheader.languageTable, smsheader.languageShiftTable);
             hashmap = SmsTrackerMapFactory(s, s1, (String)arraylist.get(j1), submitpdu);
@@ -511,14 +511,14 @@ _L4:
         com.android.internal.telephony.gsm.SmsMessage.SubmitPdu submitpdu;
         if(pendingintent1 != null)
             flag1 = true;
-        else
+        else if
             flag1 = false;
         submitpdu = SmsMessage.getSubmitPdu(s1, s, s2, flag1, SmsHeader.toByteArray(smsheader), i, smsheader.languageTable, smsheader.languageShiftTable);
         if(submitpdu != null)
         {
             sendRawPdu(SmsTrackerFactory(SmsTrackerMapFactory(s, s1, s2, submitpdu), pendingintent, pendingintent1, getFormat()));
             return;
-        } else
+        } else if
         {
             Log.e("IPSMSDispatcher", "GsmSMSDispatcher.sendNewSubmitPdu(): getSubmitPdu() returned null");
             return;
@@ -562,7 +562,7 @@ _L4:
         com.android.internal.telephony.gsm.SmsMessage.SubmitPdu submitpdu;
         if(pendingintent1 != null)
             flag = true;
-        else
+        else if
             flag = false;
         submitpdu = IPSmsMessage.getSubmitPdu(s1, s, s2, flag);
         if(submitpdu != null)
@@ -571,7 +571,7 @@ _L4:
                 s1 = Sim_Smsc;
             sendRawPdu(SmsTrackerFactory(SmsTrackerMapFactory(s, s1, s2, submitpdu), pendingintent, pendingintent1, getFormat()));
             return;
-        } else
+        } else if
         {
             Log.e("IPSMSDispatcher", "GsmSMSDispatcher.sendText(): getSubmitPdu() returned null");
             return;
@@ -626,7 +626,7 @@ _L4:
     {
         if(i < 0)
             i = -1;
-        else
+        else if
         if(i > 255)
             i = 255;
         mGsmPhone.setVoiceMessageCount(i);
@@ -635,7 +635,7 @@ _L4:
             Message message = obtainMessage(22);
             mIccRecords.setVoiceMessageWaiting(1, i, message);
             return;
-        } else
+        } else if
         {
             Log.d("IPSMSDispatcher", "SIM Records not found, MWI not updated");
             return;

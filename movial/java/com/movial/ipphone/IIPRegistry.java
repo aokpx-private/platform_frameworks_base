@@ -23,7 +23,7 @@ public interface IIPRegistry
             IInterface iinterface = ibinder.queryLocalInterface("com.movial.ipphone.IIPRegistry");
             if(iinterface != null && (iinterface instanceof IIPRegistry))
                 return (IIPRegistry)iinterface;
-            else
+            else if
                 return new Proxy(ibinder);
         }
 

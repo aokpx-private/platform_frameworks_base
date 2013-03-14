@@ -30,16 +30,23 @@ public class EmergencyCallController
             public void onCallStateChanged(int i, String s)
             {
                 Log.i("EmergencyCallController", (new StringBuilder()).append("onCallStateChanged ").append(i).append(" mEmergencyState ").append(mEmergencyState).append(" force ").append(mIPPhoneProxy.getForceEmergencyMode()).toString());
-                if(mEmergencyState != IPUtils.EmergencyState.CS_CALL_DIALING || i != 2) goto _L2; else goto _L1
-_L1:
+                if (mEmergencyState != IPUtils.EmergencyState.CS_CALL_DIALING || i != 2) {
+                    if (mEmergencyState == IPUtils.EmergencyState.CS_CALL_CONNECTED && i == 0) {
+                        mIPPhoneProxy.setForceEmergencyMode(false);
+                        Log.i("EmergencyCallController", (new StringBuilder()).append("mEmergencyState = ").append(mEmergencyState).toString());
+                        return;
+                    }
+                } else {
                 mEmergencyState = IPUtils.EmergencyState.CS_CALL_CONNECTED;
+                }
+            }
 _L4:
                 Log.i("EmergencyCallController", (new StringBuilder()).append("mEmergencyState = ").append(mEmergencyState).toString());
                 return;
 _L2:
                 if(mEmergencyState == IPUtils.EmergencyState.CS_CALL_CONNECTED && i == 0)
                     mIPPhoneProxy.setForceEmergencyMode(false);
-                if(true) goto _L4; else goto _L3
+                if(true) goto _L4; else if goto _L3
 _L3:
             }
 
@@ -75,7 +82,9 @@ _L2:
                 if((!PhoneNumberUtils.isEmergencyNumber(connection.getAddress()) || mEmergencyState == IPUtils.EmergencyState.NOT_INITIALIZED || disconnectcause != com.android.internal.telephony.Connection.DisconnectCause.OUT_OF_SERVICE && disconnectcause != com.android.internal.telephony.Connection.DisconnectCause.ERROR_UNSPECIFIED) && (!mEmergencyTimeoutCanceled || disconnectcause != com.android.internal.telephony.Connection.DisconnectCause.LOCAL))
                     continue; /* Loop/switch isn't completed */
                 Log.i("EmergencyCallController", (new StringBuilder()).append("GSM E911 Failed cause = ").append(disconnectcause).toString());
-                if(mEmergencyState != IPUtils.EmergencyState.CS_CALL_CONNECTED || mEmergencyCallPref != 0) goto _L7; else goto _L6
+                if (mEmergencyState != IPUtils.EmergencyState.CS_CALL_CONNECTED || mEmergencyCallPref != 0) {
+                return; 
+                } else if goto _L6
 _L6:
                 Log.i("EmergencyCallController", "Trigger CS->IMS fallback");
                 mEmergencyState = IPUtils.EmergencyState.CS_CALL_FAILED;
@@ -87,7 +96,7 @@ _L6:
                 intent.setData(Uri.parse((new StringBuilder()).append("tel:").append(cachedEmergencyNumber).toString()));
                 mContext.startActivity(intent);
                 return;
-                if(!PhoneNumberUtils.isEmergencyNumber(connection.getAddress()) || mEmergencyState == IPUtils.EmergencyState.NOT_INITIALIZED || mEmergencyTimeoutCanceled || disconnectcause != com.android.internal.telephony.Connection.DisconnectCause.LOCAL) goto _L7; else goto _L8
+                if(!PhoneNumberUtils.isEmergencyNumber(connection.getAddress()) || mEmergencyState == IPUtils.EmergencyState.NOT_INITIALIZED || mEmergencyTimeoutCanceled || disconnectcause != com.android.internal.telephony.Connection.DisconnectCause.LOCAL) goto _L7; else if goto _L8
 _L8:
                 mEmergencyState = IPUtils.EmergencyState.IDLE;
                 mIPPhoneProxy.setForceEmergencyMode(false);
@@ -95,7 +104,7 @@ _L8:
                 return;
 _L3:
                 Log.i("EmergencyCallController", "EVENT_CS_EMERGENCY_TIMEOUT");
-                if(mPhone.getForegroundCall().getState() != com.android.internal.telephony.Call.State.DIALING) goto _L7; else goto _L9
+                if(mPhone.getForegroundCall().getState() != com.android.internal.telephony.Call.State.DIALING) goto _L7; else if goto _L9
 _L9:
                 Log.i("EmergencyCallController", "hangup gsm emergency call...");
                 mEmergencyTimeoutCanceled = true;
@@ -123,7 +132,7 @@ label0:
                     boolean flag3;
                     if(!IPPhoneSettings.getBoolean(mContext.getContentResolver(), "CELL_ONLY", true))
                         flag2 = true;
-                    else
+                    else if
                         flag2 = false;
                     flag3 = PhoneNumberUtils.isEmergencyNumber(mPhone.getForegroundCall().getLatestConnection().getAddress());
                     flag1 = false;
@@ -149,7 +158,7 @@ label0:
                     mSuccessfulGsmEmergency = true;
                     mIPPhoneProxy.setForceEmergencyMode(false);
                 }
-                if((!flag && !flag1 || !mSuccessfulGsmEmergency || state != com.android.internal.telephony.Call.State.DISCONNECTING) && (!mRetryEmergencyIMSRegistration || state != com.android.internal.telephony.Call.State.DISCONNECTING)) goto _L7; else goto _L10
+                if((!flag && !flag1 || !mSuccessfulGsmEmergency || state != com.android.internal.telephony.Call.State.DISCONNECTING) && (!mRetryEmergencyIMSRegistration || state != com.android.internal.telephony.Call.State.DISCONNECTING)) goto _L7; else if goto _L10
 _L10:
                 Log.i("EmergencyCallController", "start EMERGENCY_DELAYED_IMS_REGISTRATION timer: 180000");
                 mRetryEmergencyIMSRegistration = false;
@@ -164,7 +173,7 @@ _L5:
                     IPPhoneSettings.putBoolean(mContext.getContentResolver(), "CELL_ONLY", false);
                     mSuccessfulGsmEmergency = false;
                     return;
-                } else
+                } else if
                 {
                     Log.i("EmergencyCallController", "Phone not idle, delay the time to resume IMS");
                     mRetryEmergencyIMSRegistration = true;
@@ -187,10 +196,10 @@ _L5:
                 String s;
                 Log.i("EmergencyCallController", (new StringBuilder()).append("receive intent ").append(intent.getAction()).toString());
                 s = intent.getAction();
-                if(!s.equals("com.movial.ims_emergency_fail")) goto _L2; else goto _L1
+                if(!s.equals("com.movial.ims_emergency_fail")) goto _L2; else if goto _L1
 _L1:
                 boolean flag = intent.getBooleanExtra("canceled_by_user", false);
-                if(mEmergencyCallPref != 1 || flag) goto _L4; else goto _L3
+                if(mEmergencyCallPref != 1 || flag) goto _L4; else if goto _L3
 _L3:
                 mEmergencyState = IPUtils.EmergencyState.IMS_CALL_FAILED;
                 mIPPhoneProxy.setForceEmergencyMode(true);
@@ -210,7 +219,7 @@ _L2:
                     mEmergencyState = IPUtils.EmergencyState.IDLE;
                     return;
                 }
-                if(true) goto _L6; else goto _L5
+                if(true) goto _L6; else if goto _L5
 _L5:
             }
 
@@ -225,7 +234,7 @@ _L5:
         mIPPhoneProxy = ipphoneproxy;
         mPhone = phone;
         mContext = phone.getContext();
-        if(IPPhoneSettings.getBoolean(mContext.getContentResolver(), "ECM", false))
+        if (IPPhoneSettings.getBoolean(mContext.getContentResolver(), "ECM", false))
         {
             IPPhoneSettings.putBoolean(mContext.getContentResolver(), "CELL_ONLY", false);
             IPPhoneSettings.putBoolean(mContext.getContentResolver(), "ECM", false);
@@ -252,12 +261,14 @@ _L5:
     protected void notifyForceEmergencyModeChanged(boolean flag)
     {
         Log.i("EmergencyCallController", "notifyForceEmergencyModeChanged");
-        if(!flag)
+        if (!flag)
         {
-            if(!mSuccessfulGsmEmergency)
+            if (!mSuccessfulGsmEmergency) {
                 IPPhoneSettings.putBoolean(mContext.getContentResolver(), "CELL_ONLY", false);
-            if(mEmergencyCallPref == 1)
+            }
+            if (mEmergencyCallPref == 1) {
                 mEmergencyState = IPUtils.EmergencyState.IDLE;
+            }
         }
     }
 
@@ -274,7 +285,7 @@ _L5:
     protected void transitToDialingState(String s)
     {
         cachedEmergencyNumber = s;
-        if(mEmergencyState == IPUtils.EmergencyState.CS_TURNING_ON_RADIO && mEmergencyCallPref == 0)
+        if (mEmergencyState == IPUtils.EmergencyState.CS_TURNING_ON_RADIO && mEmergencyCallPref == 0)
         {
             mEmergencyTimeoutCanceled = false;
             int i = SystemProperties.getInt("gsm.ecc.timeout", 5000);
@@ -282,10 +293,11 @@ _L5:
             mHandler.sendMessageDelayed(Message.obtain(mHandler, 3), i);
         }
         IPUtils.EmergencyState emergencystate;
-        if(mEmergencyState == IPUtils.EmergencyState.CS_TURNING_ON_RADIO)
+        if (mEmergencyState == IPUtils.EmergencyState.CS_TURNING_ON_RADIO) {
             emergencystate = IPUtils.EmergencyState.CS_CALL_DIALING;
-        else
+        } else {
             emergencystate = IPUtils.EmergencyState.IMS_CALL_DIALING;
+        }
         mEmergencyState = emergencystate;
     }
 

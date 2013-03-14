@@ -20,7 +20,7 @@ public interface IIPService
             IInterface iinterface = ibinder.queryLocalInterface("com.movial.ipphone.IIPService");
             if(iinterface != null && (iinterface instanceof IIPService))
                 return (IIPService)iinterface;
-            else
+            else if
                 return new Proxy(ibinder);
         }
 
@@ -114,7 +114,7 @@ public interface IIPService
                 int j2;
                 if(parcel.readInt() != 0)
                     flag4 = true;
-                else
+                else if
                     flag4 = false;
                 j2 = hold(flag4);
                 parcel1.writeNoException();
@@ -132,7 +132,7 @@ public interface IIPService
                 boolean flag3;
                 if(parcel.readInt() != 0)
                     flag3 = true;
-                else
+                else if
                     flag3 = false;
                 setMute(flag3);
                 parcel1.writeNoException();
@@ -148,7 +148,7 @@ public interface IIPService
                 int i2;
                 if(parcel.readInt() != 0)
                     messenger9 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger9 = null;
                 i2 = setCallForward(j1, k1, s3, l1, messenger9);
                 parcel1.writeNoException();
@@ -162,11 +162,11 @@ public interface IIPService
                 int i1;
                 if(parcel.readInt() != 0)
                     flag2 = true;
-                else
+                else if
                     flag2 = false;
                 if(parcel.readInt() != 0)
                     messenger8 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger8 = null;
                 i1 = setCW(flag2, messenger8);
                 parcel1.writeNoException();
@@ -178,7 +178,7 @@ public interface IIPService
                 Messenger messenger7;
                 if(parcel.readInt() != 0)
                     messenger7 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger7 = null;
                 registerForIncomingUSSD(messenger7);
                 parcel1.writeNoException();
@@ -191,7 +191,7 @@ public interface IIPService
                 int l;
                 if(parcel.readInt() != 0)
                     messenger6 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger6 = null;
                 l = sendUssd(s2, messenger6);
                 parcel1.writeNoException();
@@ -203,7 +203,7 @@ public interface IIPService
                 Messenger messenger5;
                 if(parcel.readInt() != 0)
                     messenger5 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger5 = null;
                 registerForConnectionState(messenger5);
                 parcel1.writeNoException();
@@ -214,7 +214,7 @@ public interface IIPService
                 Messenger messenger4;
                 if(parcel.readInt() != 0)
                     messenger4 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger4 = null;
                 registerForSubscription(messenger4);
                 parcel1.writeNoException();
@@ -225,7 +225,7 @@ public interface IIPService
                 Messenger messenger3;
                 if(parcel.readInt() != 0)
                     messenger3 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger3 = null;
                 registerForCallStates(messenger3);
                 parcel1.writeNoException();
@@ -238,7 +238,7 @@ public interface IIPService
                 int k;
                 if(parcel.readInt() != 0)
                     messenger2 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger2 = null;
                 flag1 = registerForEmergencyCallPref(messenger2);
                 parcel1.writeNoException();
@@ -253,7 +253,7 @@ public interface IIPService
                 Messenger messenger1;
                 if(parcel.readInt() != 0)
                     messenger1 = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger1 = null;
                 registerForIncomingSMS(messenger1);
                 parcel1.writeNoException();
@@ -266,7 +266,7 @@ public interface IIPService
                 Messenger messenger;
                 if(parcel.readInt() != 0)
                     messenger = (Messenger)Messenger.CREATOR.createFromParcel(parcel);
-                else
+                else if
                     messenger = null;
                 sendSMS(s, s1, messenger, parcel.readInt());
                 parcel1.writeNoException();
@@ -277,7 +277,7 @@ public interface IIPService
                 boolean flag;
                 if(parcel.readInt() != 0)
                     flag = true;
-                else
+                else if
                     flag = false;
                 acknowledgeLastIncomingIpSms(flag, parcel.readInt());
                 parcel1.writeNoException();

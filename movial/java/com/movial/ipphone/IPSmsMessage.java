@@ -44,11 +44,11 @@ public class IPSmsMessage extends SmsMessageBase
                 int i3;
                 if(k2 % 7 > 0)
                     i3 = 1;
-                else
+                else if
                     i3 = 0;
                 i1 = l2 + i3;
                 mUserDataSeptetPadding = i1 * 7 - k2;
-            } else
+            } else if
             {
                 l = j;
                 i1 = 0;
@@ -57,12 +57,12 @@ public class IPSmsMessage extends SmsMessageBase
             if(flag1)
             {
                 l1 = pdu.length - l;
-            } else
+            } else if
             {
                 int k1;
                 if(flag)
                     k1 = j1 + 1;
-                else
+                else if
                     k1 = 0;
                 l1 = k - k1;
                 if(l1 < 0)
@@ -76,9 +76,9 @@ public class IPSmsMessage extends SmsMessageBase
                 int i2 = k - i1;
                 if(i2 < 0)
                     return 0;
-                else
+                else if
                     return i2;
-            } else
+            } else if
             {
                 return userData.length;
             }
@@ -112,7 +112,7 @@ public class IPSmsMessage extends SmsMessageBase
         String getSCAddress()
         {
             int i = getByte();
-            if(i != 0) goto _L2; else goto _L1
+            if(i != 0) goto _L2; else if goto _L1
 _L1:
             String s = null;
 _L4:
@@ -126,7 +126,7 @@ _L2:
             runtimeexception;
             Log.d("IPSmsMessage", "invalid SC address: ", runtimeexception);
             s = null;
-            if(true) goto _L4; else goto _L3
+            if(true) goto _L4; else if goto _L3
 _L3:
         }
 
@@ -168,7 +168,7 @@ _L3:
             time = new Time("UTC");
             if(j >= 90)
                 k3 = j + 1900;
-            else
+            else if
                 k3 = j + 2000;
             time.year = k3;
             time.month = l - 1;
@@ -288,7 +288,7 @@ _L3:
             {
                 textencodingdetails.msgCount = (i + 133) / 134;
                 textencodingdetails.codeUnitsRemaining = (134 * textencodingdetails.msgCount - i) / 2;
-            } else
+            } else if
             {
                 textencodingdetails.msgCount = 1;
                 textencodingdetails.codeUnitsRemaining = (140 - i) / 2;
@@ -351,7 +351,7 @@ _L3:
             abyte2[0] = (byte)abyte0.length;
             System.arraycopy(abyte0, 0, abyte2, 1, abyte0.length);
             System.arraycopy(abyte1, 0, abyte2, 1 + abyte0.length, abyte1.length);
-        } else
+        } else if
         {
             abyte2 = abyte1;
         }
@@ -379,7 +379,7 @@ _L3:
         {
             Log.e("IPSmsMessage", (new StringBuilder()).append("SMS data message may only contain ").append(-1 + (140 - abyte1.length)).append(" bytes").toString());
             return null;
-        } else
+        } else if
         {
             com.android.internal.telephony.gsm.SmsMessage.SubmitPdu submitpdu = new com.android.internal.telephony.gsm.SmsMessage.SubmitPdu();
             ByteArrayOutputStream bytearrayoutputstream = getSubmitPduHead(s, s1, (byte)65, flag, submitpdu);
@@ -429,7 +429,7 @@ _L3:
                         smsheader1.languageShiftTable = k;
                         abyte0 = SmsHeader.toByteArray(smsheader1);
                     }
-                } else
+                } else if
                 {
                     SmsHeader smsheader = new SmsHeader();
                     smsheader.languageTable = j;
@@ -440,10 +440,10 @@ _L3:
         submitpdu = new com.android.internal.telephony.gsm.SmsMessage.SubmitPdu();
         if(abyte0 != null)
             byte0 = 64;
-        else
+        else if
             byte0 = 0;
         bytearrayoutputstream = getSubmitPduHead(s, s1, (byte)(byte0 | 1), flag, submitpdu);
-        if(i != 1) goto _L2; else goto _L1
+        if(i != 1) goto _L2; else if goto _L1
 _L1:
         abyte4 = GsmAlphabet.stringToGsm7BitPackedWithHeader(s2, abyte0, j, k);
         abyte2 = abyte4;
@@ -468,7 +468,7 @@ _L2:
         }
         abyte2 = abyte1;
         i = 3;
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L4:
         if(i != 1)
             break; /* Loop/switch isn't completed */
@@ -492,7 +492,7 @@ _L3:
             return null;
         }
         bytearrayoutputstream.write(8);
-        if(true) goto _L6; else goto _L5
+        if(true) goto _L6; else if goto _L5
 _L5:
     }
 
@@ -505,7 +505,7 @@ _L5:
         int k;
         if(s == null)
             submitpdu.encodedScAddress = null;
-        else
+        else if
             submitpdu.encodedScAddress = PhoneNumberUtils.networkPortionToCalledPartyBCDWithLength(s);
         if(flag)
             byte0 |= 0x20;
@@ -517,7 +517,7 @@ _L5:
         j = 2 * (-1 + abyte0.length);
         if((0xf0 & abyte0[-1 + abyte0.length]) == 240)
             k = 1;
-        else
+        else if
             k = 0;
         bytearrayoutputstream.write(j - k);
         bytearrayoutputstream.write(abyte0, 0, abyte0.length);
@@ -594,7 +594,7 @@ _L5:
         boolean flag1;
         if((i & 0x80) == 128)
             flag = true;
-        else
+        else if
             flag = false;
         replyPathPresent = flag;
         originatingAddress = pduparser.getAddress();
@@ -605,7 +605,7 @@ _L5:
         scTimeMillis = pduparser.getSCTimestampMillis();
         if((i & 0x40) == 64)
             flag1 = true;
-        else
+        else if
             flag1 = false;
         parseUserData(pduparser, flag1);
     }
@@ -616,7 +616,7 @@ _L5:
         boolean flag;
         if((i & 0x20) == 0)
             flag = true;
-        else
+        else if
             flag = false;
         forSubmit = flag;
         messageRef = pduparser.getByte();
@@ -637,7 +637,7 @@ _L5:
                 boolean flag1;
                 if((i & 0x40) == 64)
                     flag1 = true;
-                else
+                else if
                     flag1 = false;
                 parseUserData(pduparser, flag1);
             }
@@ -649,7 +649,7 @@ _L5:
         int i;
         i = 0;
         Log.i("IPSmsMessage", "parse userdata");
-        if((0x80 & dataCodingScheme) != 0) goto _L2; else goto _L1
+        if((0x80 & dataCodingScheme) != 0) goto _L2; else if goto _L1
 _L1:
         boolean flag2;
         int j;
@@ -657,18 +657,18 @@ _L1:
         boolean flag6;
         if((0x40 & dataCodingScheme) != 0)
             flag5 = true;
-        else
+        else if
             flag5 = false;
         automaticDeletion = flag5;
         if((0x20 & dataCodingScheme) != 0)
             flag6 = true;
-        else
+        else if
             flag6 = false;
         if((0x10 & dataCodingScheme) != 0)
             flag2 = true;
-        else
+        else if
             flag2 = false;
-        if(!flag6) goto _L4; else goto _L3
+        if(!flag6) goto _L4; else if goto _L3
 _L3:
         Log.w("IPSmsMessage", (new StringBuilder()).append("4 - Unsupported SMS data coding scheme (compression) ").append(0xff & dataCodingScheme).toString());
 _L13:
@@ -677,7 +677,7 @@ _L13:
         boolean flag4;
         if(i == 1)
             flag3 = true;
-        else
+        else if
             flag3 = false;
         j = pduparser.constructUserData(flag, flag3);
         userData = pduparser.getUserData();
@@ -728,18 +728,18 @@ _L2:
             flag2 = true;
             if((4 & dataCodingScheme) == 0)
                 i = 1;
-            else
+            else if
                 i = 2;
-        } else
+        } else if
         if((0xf0 & dataCodingScheme) == 192 || (0xf0 & dataCodingScheme) == 208 || (0xf0 & dataCodingScheme) == 224)
         {
             if((0xf0 & dataCodingScheme) == 224)
                 i = 3;
-            else
+            else if
                 i = 1;
             if((8 & dataCodingScheme) == 8)
                 flag1 = true;
-            else
+            else if
                 flag1 = false;
             if((3 & dataCodingScheme) == 0)
             {
@@ -747,30 +747,30 @@ _L2:
                 mwiSense = flag1;
                 if((0xf0 & dataCodingScheme) == 192)
                     flag4 = true;
-                else
+                else if
                     flag4 = false;
                 mwiDontStore = flag4;
                 flag2 = false;
-            } else
+            } else if
             {
                 isMwi = false;
                 Log.w("IPSmsMessage", (new StringBuilder()).append("MWI for fax, email, or other ").append(0xff & dataCodingScheme).toString());
                 flag2 = false;
             }
-        } else
+        } else if
         if((0xc0 & dataCodingScheme) == 128)
         {
             if(dataCodingScheme == 132)
             {
                 i = 4;
                 flag2 = false;
-            } else
+            } else if
             {
                 Log.w("IPSmsMessage", (new StringBuilder()).append("5 - Unsupported SMS data coding scheme ").append(0xff & dataCodingScheme).toString());
                 i = 0;
                 flag2 = false;
             }
-        } else
+        } else if
         {
             Log.w("IPSmsMessage", (new StringBuilder()).append("3 - Unsupported SMS data coding scheme ").append(0xff & dataCodingScheme).toString());
             i = 0;
@@ -782,7 +782,7 @@ _L6:
         if(userDataHeader != null && userDataHeader.portAddrs != null && userDataHeader.portAddrs.destPort == 2948)
         {
             Log.i("IPSmsMessage", "receive WAP PUSH");
-        } else
+        } else if
         {
             byte abyte0[];
             byte abyte1[];
@@ -818,11 +818,11 @@ _L7:
         int l;
         if(flag)
             k = userDataHeader.languageTable;
-        else
+        else if
             k = 0;
         if(flag)
             l = userDataHeader.languageShiftTable;
-        else
+        else if
             l = 0;
         messageBody = pduparser.getUserDataGSM7Bit(j, k, l);
         continue; /* Loop/switch isn't completed */
@@ -831,7 +831,7 @@ _L8:
         continue; /* Loop/switch isn't completed */
 _L9:
         messageBody = pduparser.getUserDataKSC5601(j);
-        if(true) goto _L5; else goto _L11
+        if(true) goto _L5; else if goto _L11
 _L11:
         switch(3 & dataCodingScheme)
         {
@@ -855,7 +855,7 @@ _L11:
             break;
         }
         return;
-        if(true) goto _L13; else goto _L12
+        if(true) goto _L13; else if goto _L12
 _L12:
     }
 
@@ -901,7 +901,7 @@ _L12:
         boolean flag;
         if(originatingAddress != null && ((GsmSmsAddress)originatingAddress).isCphsVoiceMessageClear())
             flag = true;
-        else
+        else if
             flag = false;
         return flag;
     }
@@ -913,7 +913,7 @@ _L12:
         boolean flag;
         if(originatingAddress != null && ((GsmSmsAddress)originatingAddress).isCphsVoiceMessageSet())
             flag = true;
-        else
+        else if
             flag = false;
         return flag;
     }
@@ -925,7 +925,7 @@ _L12:
             {
                 if(" ".equals(getMessageBody()))
                     return true;
-            } else
+            } else if
             {
                 return false;
             }

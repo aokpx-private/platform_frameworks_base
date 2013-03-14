@@ -23,7 +23,7 @@ public class IPStateListener
                 int j;
                 if(flag)
                     j = 1;
-                else
+                else if
                     j = 0;
                 Message.obtain(handler, 1, j, i, null).sendToTarget();
             }

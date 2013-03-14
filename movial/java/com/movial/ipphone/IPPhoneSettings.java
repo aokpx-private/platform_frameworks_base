@@ -33,7 +33,7 @@ public class IPPhoneSettings
         String s1 = getString(contentresolver, s, null);
         if(s1 == null)
             return i;
-        else
+        else if
             return Integer.parseInt(s1);
     }
 
@@ -69,7 +69,7 @@ _L2:
         Log.e(TAG, exception1.toString());
         if(cursor != null)
             cursor.close();
-        if(true) goto _L2; else goto _L1
+        if(true) goto _L2; else if goto _L1
 _L1:
         Exception exception;
         exception;
@@ -83,7 +83,7 @@ _L1:
         int i;
         if(flag)
             i = 1;
-        else
+        else if
             i = 0;
         return putInt(contentresolver, s, i);
     }

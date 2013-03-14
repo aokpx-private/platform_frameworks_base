@@ -42,7 +42,7 @@ class IPCall extends Call
     boolean connectionDisconnected(IPConnection ipconnection)
     {
         com.android.internal.telephony.Call.State state = this.state;
-        if(this.state == com.android.internal.telephony.Call.State.DISCONNECTED) goto _L2; else goto _L1
+        if(this.state == com.android.internal.telephony.Call.State.DISCONNECTED) goto _L2; else if goto _L1
 _L1:
         boolean flag;
         int i;
@@ -51,9 +51,9 @@ _L1:
         i = 0;
         j = connections.size();
 _L8:
-        if(i >= j) goto _L4; else goto _L3
+        if(i >= j) goto _L4; else if goto _L3
 _L3:
-        if(((Connection)connections.get(i)).getState() == com.android.internal.telephony.Call.State.DISCONNECTED) goto _L6; else goto _L5
+        if(((Connection)connections.get(i)).getState() == com.android.internal.telephony.Call.State.DISCONNECTED) goto _L6; else if goto _L5
 _L5:
         flag = false;
 _L4:
@@ -63,7 +63,7 @@ _L2:
         return state != this.state;
 _L6:
         i++;
-        if(true) goto _L8; else goto _L7
+        if(true) goto _L8; else if goto _L7
 _L7:
     }
 

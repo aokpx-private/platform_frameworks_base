@@ -20,7 +20,7 @@ public interface IIPStateListener
             IInterface iinterface = ibinder.queryLocalInterface("com.movial.ipphone.IIPStateListener");
             if(iinterface != null && (iinterface instanceof IIPStateListener))
                 return (IIPStateListener)iinterface;
-            else
+            else if
                 return new Proxy(ibinder);
         }
 
@@ -46,7 +46,7 @@ public interface IIPStateListener
                 boolean flag;
                 if(parcel.readInt() != 0)
                     flag = true;
-                else
+                else if
                     flag = false;
                 onRegisteredStateChanged(flag, parcel.readInt());
                 parcel1.writeNoException();

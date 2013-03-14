@@ -152,21 +152,21 @@ label0:
         CharSequence charsequence;
         if(callforwardinfo.reason == 2)
             flag = true;
-        else
+        else if
             flag = false;
         if(callforwardinfo.status == 1)
         {
             if(flag)
                 charsequence = context.getText(0x1040160);
-            else
+            else if
                 charsequence = context.getText(0x104015f);
-        } else
+        } else if
         if(callforwardinfo.status == 0 && isEmptyOrNull(callforwardinfo.number))
             charsequence = context.getText(0x104015e);
-        else
+        else if
         if(flag)
             charsequence = context.getText(0x1040162);
-        else
+        else if
             charsequence = context.getText(0x1040161);
         acharsequence[0] = serviceClassToCFString(i & callforwardinfo.serviceClass);
         acharsequence[1] = PhoneNumberUtils.stringFromStringAndTOA(callforwardinfo.number, callforwardinfo.toa);
@@ -198,7 +198,7 @@ label0:
             ipmmicode.sic = makeEmptyNull(matcher.group(9));
             ipmmicode.pwd = makeEmptyNull(matcher.group(11));
             ipmmicode.dialingNumber = makeEmptyNull(matcher.group(12));
-        } else
+        } else if
         {
             if(s.endsWith("#"))
             {
@@ -237,7 +237,7 @@ label0:
             ipmmicode.isPendingUSSD = true;
             ipmmicode.state = com.android.internal.telephony.MmiCode.State.PENDING;
             return ipmmicode;
-        } else
+        } else if
         {
             ipmmicode.state = com.android.internal.telephony.MmiCode.State.COMPLETE;
             return ipmmicode;
@@ -249,7 +249,7 @@ label0:
         StringBuilder stringbuilder;
         stringbuilder = new StringBuilder(getScString());
         stringbuilder.append("\n");
-        if(asyncresult.exception == null) goto _L2; else goto _L1
+        if(asyncresult.exception == null) goto _L2; else if goto _L1
 _L1:
         state = com.android.internal.telephony.MmiCode.State.FAILED;
         stringbuilder.append(context.getText(0x10400ea));
@@ -310,7 +310,7 @@ _L13:
         stringbuilder.append(context.getText(0x104011a));
 _L18:
         state = com.android.internal.telephony.MmiCode.State.COMPLETE;
-        if(true) goto _L17; else goto _L16
+        if(true) goto _L17; else if goto _L16
 _L16:
         stringbuilder.append(context.getText(0x1040119));
           goto _L18
@@ -324,7 +324,7 @@ _L15:
         StringBuilder stringbuilder;
         stringbuilder = new StringBuilder(getScString());
         stringbuilder.append("\n");
-        if(asyncresult.exception == null) goto _L2; else goto _L1
+        if(asyncresult.exception == null) goto _L2; else if goto _L1
 _L1:
         state = com.android.internal.telephony.MmiCode.State.FAILED;
         stringbuilder.append(context.getText(0x10400ea));
@@ -340,7 +340,7 @@ _L2:
         stringbuilder.append(context.getText(0x10400f5));
 _L5:
         state = com.android.internal.telephony.MmiCode.State.COMPLETE;
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
         SpannableStringBuilder spannablestringbuilder = new SpannableStringBuilder();
         for(int i = 1; i <= 128; i <<= 1)
@@ -357,7 +357,7 @@ _L3:
 
         stringbuilder.append(spannablestringbuilder);
           goto _L5
-        if(true) goto _L4; else goto _L6
+        if(true) goto _L4; else if goto _L6
 _L6:
     }
 
@@ -369,25 +369,25 @@ _L6:
         {
             state = com.android.internal.telephony.MmiCode.State.FAILED;
             stringbuilder.append(context.getText(0x10400ea));
-        } else
+        } else if
         {
             int ai[] = (int[])(int[])asyncresult.result;
             if(ai.length != 0)
             {
                 if(ai[0] == 0)
                     stringbuilder.append(context.getText(0x10400f5));
-                else
+                else if
                 if(sc.equals("43"))
                     stringbuilder.append(createQueryCallWaitingResultMessage(ai[1]));
-                else
+                else if
                 if(isServiceCodeCallBarring(sc))
                     stringbuilder.append(createQueryCallBarringResultMessage(ai[0]));
-                else
+                else if
                 if(ai[0] == 1)
                     stringbuilder.append(context.getText(0x10400f3));
-                else
+                else if
                     stringbuilder.append(context.getText(0x10400ea));
-            } else
+            } else if
             {
                 stringbuilder.append(context.getText(0x10400ea));
             }
@@ -413,49 +413,49 @@ _L6:
                     {
                         if(sc.equals("05") || sc.equals("052"))
                             stringbuilder.append(context.getText(0x10400fb));
-                        else
+                        else if
                             stringbuilder.append(context.getText(0x10400fa));
-                    } else
+                    } else if
                     {
                         stringbuilder.append(context.getText(0x10400f8));
                     }
-                } else
+                } else if
                 if(error == com.android.internal.telephony.CommandException.Error.SIM_PUK2)
                 {
                     stringbuilder.append(context.getText(0x10400fa));
                     stringbuilder.append("\n");
                     stringbuilder.append(context.getText(0x1040100));
-                } else
+                } else if
                 {
                     stringbuilder.append(context.getText(0x10400ea));
                 }
-            } else
+            } else if
             {
                 stringbuilder.append(context.getText(0x10400ea));
             }
-        } else
+        } else if
         if(isActivate())
         {
             state = com.android.internal.telephony.MmiCode.State.COMPLETE;
             stringbuilder.append(context.getText(0x10400f3));
             if(!sc.equals("31"));
-        } else
+        } else if
         if(isDeactivate())
         {
             state = com.android.internal.telephony.MmiCode.State.COMPLETE;
             stringbuilder.append(context.getText(0x10400f5));
             if(!sc.equals("31"));
-        } else
+        } else if
         if(isRegister())
         {
             state = com.android.internal.telephony.MmiCode.State.COMPLETE;
             stringbuilder.append(context.getText(0x10400f6));
-        } else
+        } else if
         if(isErasure())
         {
             state = com.android.internal.telephony.MmiCode.State.COMPLETE;
             stringbuilder.append(context.getText(0x10400f7));
-        } else
+        } else if
         {
             state = com.android.internal.telephony.MmiCode.State.FAILED;
             stringbuilder.append(context.getText(0x10400ea));
@@ -484,7 +484,7 @@ _L6:
             return "AG";
         if(s.equals("353"))
             return "AC";
-        else
+        else if
             throw new RuntimeException("invalid call barring sc");
     }
 
@@ -504,7 +504,7 @@ _L6:
             return 2;
         if(s.equals("004"))
             return 5;
-        else
+        else if
             throw new RuntimeException("invalid call forward sc");
     }
 
@@ -595,7 +595,7 @@ _L6:
     {
         if(s == null || s.length() == 0)
             return 0;
-        else
+        else if
             return Integer.parseInt(s, 10);
     }
 
@@ -608,7 +608,7 @@ _L6:
         {
             phone.cancelPendingUssd(obtainMessage(7, this));
             return;
-        } else
+        } else if
         {
             phone.onMMIDone(this);
             return;
@@ -676,13 +676,13 @@ _L7:
             boolean flag;
             if(message1.arg2 == 1)
                 flag = true;
-            else
+            else if
                 flag = false;
             if(((GSMPhone)phone.getGsmPhone()).getIccRecords() != null)
             {
                 ((GSMPhone)phone.getGsmPhone()).getIccRecords().setVoiceCallForwardingFlag(1, flag);
                 ((GSMPhone)phone.getGsmPhone()).setCallForwardingPreference(flag);
-            } else
+            } else if
             {
                 Log.w("IPMmiCode", "setVoiceCallForwardingFlag aborted. sim records is null.");
             }
@@ -778,7 +778,7 @@ _L8:
         {
             if(s == null)
                 message = context.getText(0x10400f9);
-            else
+            else if
                 message = s;
             isUssdRequest = flag;
             if(!flag)
@@ -864,7 +864,7 @@ _L8:
             return;
         }
         throw new RuntimeException("Invalid or Unsupported MMI Code");
-        if(!isServiceCodeCallForwarding(sc)) goto _L2; else goto _L1
+        if(!isServiceCodeCallForwarding(sc)) goto _L2; else if goto _L1
 _L1:
         String s;
         int i;
@@ -877,7 +877,7 @@ _L1:
         k = siToTime(sic);
         if(isInterrogate())
             throw new RuntimeException("Invalid or Unsupported MMI Code");
-        if(!isActivate()) goto _L4; else goto _L3
+        if(!isActivate()) goto _L4; else if goto _L3
 _L3:
         byte byte0 = 1;
           goto _L5
@@ -888,24 +888,24 @@ _L15:
         phone.setCallForwardingOption(byte0, j, s, k, obtainMessage(6, l, i1, this));
         return;
 _L4:
-        if(!isDeactivate()) goto _L7; else goto _L6
+        if(!isDeactivate()) goto _L7; else if goto _L6
 _L6:
         byte0 = 0;
           goto _L5
 _L7:
-        if(!isRegister()) goto _L9; else goto _L8
+        if(!isRegister()) goto _L9; else if goto _L8
 _L8:
         byte0 = 3;
           goto _L5
 _L9:
-        if(!isErasure()) goto _L11; else goto _L10
+        if(!isErasure()) goto _L11; else if goto _L10
 _L10:
         byte0 = 4;
           goto _L5
 _L11:
         throw new RuntimeException("invalid action");
 _L2:
-        if(sc == null || !sc.equals("43")) goto _L13; else goto _L12
+        if(sc == null || !sc.equals("43")) goto _L13; else if goto _L12
 _L12:
         siToServiceClass(sia);
         if(isActivate() || isDeactivate())
@@ -915,7 +915,7 @@ _L12:
         }
         if(isInterrogate())
             throw new RuntimeException("Invalid or Unsupported MMI Code");
-        else
+        else if
             throw new RuntimeException("Invalid or Unsupported MMI Code");
 _L13:
         if(poundString != null)
@@ -927,7 +927,7 @@ _L13:
 _L5:
         if((j == 0 || j == 4) && ((i & 1) != 0 || i == 0))
             l = 1;
-        else
+        else if
             l = 0;
         if(byte0 != 1)
         {
@@ -936,7 +936,7 @@ _L5:
                 continue; /* Loop/switch isn't completed */
         }
         i1 = 1;
-        if(true) goto _L15; else goto _L14
+        if(true) goto _L15; else if goto _L14
 _L14:
     }
 

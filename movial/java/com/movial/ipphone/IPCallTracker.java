@@ -85,7 +85,7 @@ public final class IPCallTracker extends CallTracker
                     removeConnection(message.arg2, com.android.internal.telephony.Connection.DisconnectCause.ERROR_UNSPECIFIED);
                     if(message.arg1 == 1)
                         pendingMOIndex = -1;
-                    else
+                    else if
                     if(message.arg1 == 2)
                         pendingMOConn.clear();
                     updatePhoneState();
@@ -255,12 +255,12 @@ public final class IPCallTracker extends CallTracker
         com.android.internal.telephony.Connection.DisconnectCause disconnectcause1;
         ipconnection = (IPConnection)connections.get(i);
         disconnectcause1 = disconnectcause;
-        if(!ipconnection.isIncoming() || ipconnection.getConnectTime() != 0L) goto _L2; else goto _L1
+        if(!ipconnection.isIncoming() || ipconnection.getConnectTime() != 0L) goto _L2; else if goto _L1
 _L1:
         boolean flag;
         if(ipconnection.cause == com.android.internal.telephony.Connection.DisconnectCause.LOCAL)
             disconnectcause1 = com.android.internal.telephony.Connection.DisconnectCause.INCOMING_REJECTED;
-        else
+        else if
             disconnectcause1 = com.android.internal.telephony.Connection.DisconnectCause.INCOMING_MISSED;
 _L4:
         log((new StringBuilder()).append("removeConnection. cause: ").append(disconnectcause1).toString());
@@ -270,7 +270,7 @@ _L4:
 _L2:
         if(ipconnection.cause == com.android.internal.telephony.Connection.DisconnectCause.LOCAL)
             disconnectcause1 = com.android.internal.telephony.Connection.DisconnectCause.LOCAL;
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
     }
 
@@ -280,9 +280,9 @@ _L3:
         flag = false;
         if(sessioncall.state == SessionCall.State.DISCONNECTED)
             swapCall = -1;
-        if(swapCall <= 0) goto _L2; else goto _L1
+        if(swapCall <= 0) goto _L2; else if goto _L1
 _L1:
-        if(!sessioncall.inConf) goto _L4; else goto _L3
+        if(!sessioncall.inConf) goto _L4; else if goto _L3
 _L3:
         swapCall = -1 + swapCall;
 _L6:
@@ -312,7 +312,7 @@ _L2:
         flag = false;
         if(i == -1)
             flag = true;
-        if(true) goto _L6; else goto _L5
+        if(true) goto _L6; else if goto _L5
 _L5:
     }
 
@@ -325,7 +325,7 @@ _L5:
         int j;
         if(sessioncall.state == SessionCall.State.UNKNOWN)
             state1 = SessionCall.State.ACTIVE;
-        else
+        else if
             state1 = sessioncall.state;
         sessioncall.state = state1;
         j = i;
@@ -337,11 +337,11 @@ _L5:
                 {
                     if(!flag1)
                         flag1 = removeConnection(j, sessioncall.cause);
-                } else
+                } else if
                 if(ipconnection.update(sessioncall.state))
                     if(flag)
                         flag1 = true;
-                    else
+                    else if
                         flag1 = false;
             j--;
         }
@@ -358,7 +358,7 @@ _L5:
         bundle.setClassLoader(com/movial/ipphone/IPCallTracker.getClassLoader());
         sessioncall = (SessionCall)bundle.getParcelable("call");
         i = findConnection(sessioncall);
-        if(message.what != 1) goto _L2; else goto _L1
+        if(message.what != 1) goto _L2; else if goto _L1
 _L1:
         Log.d("IPCallTracker", (new StringBuilder()).append("SessionCall.MSG_CALL_RINGING. ").append(ringingIndex).append(", ").append(i).toString());
         if(i != -1 && ((IPConnection)connections.get(i)).getState() == com.android.internal.telephony.Call.State.INCOMING && ringingIndex == -1)
@@ -377,7 +377,7 @@ _L2:
             Log.i("IPCallTracker", "updateConnection: update CNAM");
             ((IPConnection)connections.get(i)).cnapName = ((DriverCall) (sessioncall)).name;
             flag = true;
-        } else
+        } else if
         {
             int j = ringingIndex;
             flag = false;
@@ -401,7 +401,7 @@ _L2:
             boolean flag5;
             if(message.arg1 == 1)
                 flag5 = true;
-            else
+            else if
                 flag5 = false;
             ipphone.notifyRingbackTone(flag5);
         }
@@ -446,18 +446,18 @@ _L5:
           goto _L7
         if(sessioncall.state == SessionCall.State.DISCONNECTED)
             flag4 = removeConnection(i, sessioncall.cause);
-        else
+        else if
         if(flag)
         {
             flag4 = true;
-        } else
+        } else if
         {
             boolean flag3 = ((IPConnection)connections.get(i)).update(sessioncall.state);
             flag4 = false;
             if(flag3)
                 if(flag2 && !flag1)
                     flag4 = true;
-                else
+                else if
                     flag4 = false;
         }
           goto _L8
@@ -469,16 +469,16 @@ _L5:
         state1 = state;
         if(ringingCall.isRinging())
             state = com.android.internal.telephony.Phone.State.RINGING;
-        else
+        else if
         if(!foregroundCall.isIdle() || !backgroundCall.isIdle())
         {
             state = com.android.internal.telephony.Phone.State.OFFHOOK;
-        } else
+        } else if
         {
             state = com.android.internal.telephony.Phone.State.IDLE;
             swapCall = -1;
         }
-        if(state != com.android.internal.telephony.Phone.State.IDLE || state1 == state) goto _L2; else goto _L1
+        if(state != com.android.internal.telephony.Phone.State.IDLE || state1 == state) goto _L2; else if goto _L1
 _L1:
         voiceCallEndedRegistrants.notifyRegistrants(new AsyncResult(null, null, null));
 _L4:
@@ -489,7 +489,7 @@ _L4:
 _L2:
         if(state1 == com.android.internal.telephony.Phone.State.IDLE && state1 != state)
             voiceCallStartedRegistrants.notifyRegistrants(new AsyncResult(null, null, null));
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
     }
 
@@ -513,7 +513,7 @@ _L3:
         throws CallStateException
     {
         log((new StringBuilder()).append("acceptCall. ringingcall state: ").append(ringingCall.getState()).toString());
-        if(foregroundCall.getState() != com.android.internal.telephony.Call.State.DISCONNECTING) goto _L2; else goto _L1
+        if(foregroundCall.getState() != com.android.internal.telephony.Call.State.DISCONNECTING) goto _L2; else if goto _L1
 _L1:
         return;
 _L2:
@@ -525,7 +525,7 @@ _L2:
 _L3:
         throw new CallStateException("phone not ringing");
 _L4:
-        if(switchWaitingOrHoldingAndActive(true) != -1) goto _L1; else goto _L5
+        if(switchWaitingOrHoldingAndActive(true) != -1) goto _L1; else if goto _L5
 _L5:
         setMute(false);
         try
@@ -576,7 +576,7 @@ _L5:
             mWifiLock.release();
             log("release wifilock");
             return;
-        } else
+        } else if
         {
             log((new StringBuilder()).append("is lock held: ").append(mWifiLock.isHeld()).toString());
             return;
@@ -617,7 +617,7 @@ _L5:
         IPConnection ipconnection;
         if(foregroundCall.getState() == com.android.internal.telephony.Call.State.ACTIVE)
             flag = true;
-        else
+        else if
             flag = false;
         if(flag)
         {
@@ -629,7 +629,7 @@ _L5:
         setMute(false);
         if(!flag)
             dial(ipconnection, i);
-        else
+        else if
             pendingMOConn.set(-1 + connections.size(), i);
         updatePhoneState();
         phone.notifyPreciseCallStateChanged();
@@ -639,7 +639,7 @@ _L5:
     void dial(IPConnection ipconnection, int i)
     {
         int j = -1;
-        if(!PhoneNumberUtils.isEmergencyNumber(ipconnection.getDialString())) goto _L2; else goto _L1
+        if(!PhoneNumberUtils.isEmergencyNumber(ipconnection.getDialString())) goto _L2; else if goto _L1
 _L1:
         int l = mIPService.dialEmergencyCall(ipconnection.getAddress());
         j = l;
@@ -651,7 +651,7 @@ _L3:
             pendingMOIndex = -1 + connections.size();
             Message message = mHandler.obtainMessage(41, 1, pendingMOIndex);
             mHandler.sendMessageDelayed(message, DELAYED_REMOVE_CONNECTION);
-        } else
+        } else if
         {
             ipconnection.index = j;
         }
@@ -670,7 +670,7 @@ _L2:
     void dialAfterHolding(SessionCall sessioncall)
     {
         log((new StringBuilder()).append("dialAfterHolding. isnull: ").append(pendingMOConn.isNull()).append(", state: ").append(sessioncall.state).toString());
-        if(!pendingMOConn.isNull()) goto _L2; else goto _L1
+        if(!pendingMOConn.isNull()) goto _L2; else if goto _L1
 _L1:
         return;
 _L2:
@@ -680,7 +680,7 @@ _L2:
             mHandler.sendMessage(message);
             return;
         }
-        if(sessioncall.state != SessionCall.State.HOLDING) goto _L1; else goto _L3
+        if(sessioncall.state != SessionCall.State.HOLDING) goto _L1; else if goto _L3
 _L3:
         int i = 0;
 _L5:
@@ -703,7 +703,7 @@ _L5:
         {
             return;
         }
-        if(state1 != state2) goto _L1; else goto _L4
+        if(state1 != state2) goto _L1; else if goto _L4
 _L4:
         clearDisconnected();
         IPConnection ipconnection = (IPConnection)connections.get(-1 + connections.size());
@@ -740,30 +740,30 @@ _L4:
         {
             log("(ringing) hangup ringing or waiting call");
             reject(ipcall);
-        } else
+        } else if
         if(ipcall == foregroundCall)
         {
             if(ipcall.isDialingOrAlerting())
             {
                 log("(foregnd) hangup dialing or alerting...");
                 hangup((IPConnection)(IPConnection)ipcall.getConnections().get(0));
-            } else
+            } else if
             {
                 hangupForegroundResumeBackground();
             }
-        } else
+        } else if
         if(ipcall == backgroundCall)
         {
             if(ringingCall.isRinging())
             {
                 log("(backgnd) hangup all rining call");
                 reject(ringingCall);
-            } else
+            } else if
             {
                 log("(backgnd) hangup all conns in background call");
                 hangupAll(ipcall);
             }
-        } else
+        } else if
         {
             throw new RuntimeException((new StringBuilder()).append("IPCall ").append(ipcall).append("does not belong to IPCallTracker ").append(this).toString());
         }
@@ -776,7 +776,7 @@ _L4:
     {
         if(ipconnection.owner != this)
             throw new CallStateException((new StringBuilder()).append("IPConnection ").append(ipconnection).append("does not belong to IPCallTracker ").append(this).toString());
-        if(pendingMOConn.isNull() || ipconnection != connections.get(-1 + connections.size())) goto _L2; else goto _L1
+        if(pendingMOConn.isNull() || ipconnection != connections.get(-1 + connections.size())) goto _L2; else if goto _L1
 _L1:
         removeConnection(-1 + connections.size(), com.android.internal.telephony.Connection.DisconnectCause.ERROR_UNSPECIFIED);
         updatePhoneState();
@@ -801,7 +801,7 @@ _L2:
             loge((new StringBuilder()).append("hangup connection: ").append(ipconnection.getIndex()).append(" FAILED. ").append(exception.toString()).toString());
             clearConnections();
         }
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
     }
 
@@ -1014,7 +1014,7 @@ _L3:
         }
         if(flag)
             j = -1;
-        else
+        else if
             j = i;
         swapCall = j;
         return i;

@@ -43,7 +43,7 @@ public class IPPhoneProxy extends Handler
                 if(s.equals("com.movial.terminate_stack"))
                 {
                     unbindService(intent.getBooleanExtra("restart_service", false));
-                } else
+                } else if
                 {
                     if("android.provider.Telephony.SPN_STRINGS_UPDATED".equals(s))
                     {
@@ -66,7 +66,7 @@ public class IPPhoneProxy extends Handler
                             Log.d("IPPhoneProxy", "IPUtils.ACTION_REREAD_ISIM : reReadISimRecords: ");
                             ((IsimUiccRecords)getIsimRecords()).reReadIsimRecords();
                             return;
-                        } else
+                        } else if
                         {
                             Log.d("IPPhoneProxy", "IPUtils.ACTION_REREAD_ISIM : ISIM not found");
                             return;
@@ -133,7 +133,7 @@ public class IPPhoneProxy extends Handler
                     broadcastOperatorName();
                 if(IPPhoneProxy.mRegistered)
                     setEmergencyState(IPUtils.EmergencyState.IDLE);
-                else
+                else if
                     setEmergencyState(IPUtils.EmergencyState.NOT_INITIALIZED);
                 IPPhoneProxy.logd((new StringBuilder()).append("onRegisteredStateChanged. mRegistered: ").append(IPPhoneProxy.mRegistered).toString());
                 return;
@@ -230,7 +230,7 @@ public class IPPhoneProxy extends Handler
         if(IPPhoneSettings.getBoolean(getContext().getContentResolver(), "CELL_ONLY", true))
         {
             return;
-        } else
+        } else if
         {
             (new Thread() {
 
@@ -291,7 +291,7 @@ _L1:
         String s1;
         if(ServiceState.isGsm(i))
             s1 = "GSM";
-        else
+        else if
             s1 = "CDMA";
         logd(stringbuilder.append(s1).toString());
         if(phone != null)
@@ -300,7 +300,7 @@ _L1:
             logd("Disposing old phone..");
             phone.dispose();
         }
-        if(!ServiceState.isCdma(i)) goto _L2; else goto _L1
+        if(!ServiceState.isCdma(i)) goto _L2; else if goto _L1
 _L1:
         mActivePhone = PhoneFactory.getCdmaPhone();
 _L4:
@@ -312,7 +312,7 @@ _L4:
 _L2:
         if(ServiceState.isGsm(i))
             mActivePhone = PhoneFactory.getGsmPhone();
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
     }
 
@@ -346,7 +346,7 @@ _L3:
             mForegroundCall = mIPPhone.getForegroundCall();
             mBackgroundCall = mIPPhone.getBackgroundCall();
             mRingingCall = mIPPhone.getRingingCall();
-        } else
+        } else if
         {
             mForegroundCall = mActivePhone.getForegroundCall();
             mBackgroundCall = mActivePhone.getBackgroundCall();
@@ -361,7 +361,7 @@ _L3:
         {
             mIccSmsInterfaceManager.setIPSMSDispatcher(mIPSMSDispatcher);
             return;
-        } else
+        } else if
         {
             mIccSmsInterfaceManager.setIPSMSDispatcher(null);
             return;
@@ -405,22 +405,22 @@ _L3:
             StringBuilder stringbuilder7;
             if(flag)
                 s2 = "1";
-            else
+            else if
                 s2 = "0";
             stringbuilder1 = stringbuilder.append(s2).append(",");
             if(TextUtils.isEmpty(s))
                 s3 = "null";
-            else
+            else if
                 s3 = s;
             stringbuilder2 = stringbuilder1.append(s3).append(",");
             if(flag1)
                 s4 = "1";
-            else
+            else if
                 s4 = "0";
             stringbuilder3 = stringbuilder2.append(s4).append(",");
             if(TextUtils.isEmpty(s1))
                 s5 = "null";
-            else
+            else if
                 s5 = s1;
             mRealName = stringbuilder3.append(s5).toString();
         }
@@ -432,7 +432,7 @@ _L3:
             String s8;
             if(flag)
                 s7 = "1";
-            else
+            else if
                 s7 = "0";
             stringbuilder5 = stringbuilder4.append(s7).append(",");
             if(TextUtils.isEmpty(s))
@@ -440,7 +440,7 @@ _L3:
             stringbuilder6 = stringbuilder5.append(s).append(",");
             if(flag1)
                 s8 = "1";
-            else
+            else if
                 s8 = "0";
             stringbuilder7 = stringbuilder6.append(s8).append(",");
             if(TextUtils.isEmpty(s1))
@@ -451,7 +451,7 @@ _L3:
         {
             if(!s6.trim().equals(mOperatorName))
                 mOperatorName = s6;
-        } else
+        } else if
         if(!intent.getBooleanExtra("IMS_WIFICALL", false))
         {
             sendEmptyMessageDelayed(6, 1000L);
@@ -471,7 +471,7 @@ _L3:
                 }
                 logd((new StringBuilder()).append("LTE ON CDMA property is set. Switch to CDMALTEPhone newVoiceRadioTech = ").append(i).append(" Active Phone = ").append(mActivePhone.getPhoneName()).toString());
                 i = 6;
-            } else
+            } else if
             if(ServiceState.isCdma(i) && mActivePhone.getPhoneType() == 2 || ServiceState.isGsm(i) && mActivePhone.getPhoneType() == 1)
             {
                 logd((new StringBuilder()).append("Ignoring voice radio technology changed message. newVoiceRadioTech = ").append(i).append(" Active Phone = ").append(mActivePhone.getPhoneName()).toString());
@@ -545,7 +545,7 @@ _L3:
         {
             mIPPhone.acceptCall();
             return;
-        } else
+        } else if
         {
             mActivePhone.acceptCall();
             return;
@@ -572,7 +572,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.canConference();
-        else
+        else if
             return mActivePhone.canConference();
     }
 
@@ -580,7 +580,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.canTransfer();
-        else
+        else if
             return mActivePhone.canTransfer();
     }
 
@@ -588,7 +588,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.changeBarringPassword(s, s1, s2, message);
-        else
+        else if
             return mActivePhone.changeBarringPassword(s, s1, s2, message);
     }
 
@@ -596,7 +596,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.changeBarringPassword(s, s1, s2, s3, message);
-        else
+        else if
             return mActivePhone.changeBarringPassword(s, s1, s2, s3, message);
     }
 
@@ -613,7 +613,7 @@ _L3:
         {
             mIPPhone.conference();
             return;
-        } else
+        } else if
         {
             mActivePhone.conference();
             return;
@@ -635,7 +635,7 @@ _L3:
         {
             Log.i("IPPhoneProxy", "ims call");
             return mIPPhone.dial(s);
-        } else
+        } else if
         {
             Log.i("IPPhoneProxy", "gsm call");
             return mActivePhone.dial(s);
@@ -653,7 +653,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.dialVideoCall(s);
-        else
+        else if
             return mActivePhone.dialVideoCall(s);
     }
 
@@ -720,7 +720,7 @@ _L3:
         {
             mActivePhone.exitEmergencyCallbackMode();
             return;
-        } else
+        } else if
         {
             mIPPhone.exitEmergencyCallbackMode();
             return;
@@ -734,7 +734,7 @@ _L3:
         {
             mIPPhone.explicitCallTransfer();
             return;
-        } else
+        } else if
         {
             mActivePhone.explicitCallTransfer();
             return;
@@ -794,7 +794,7 @@ _L3:
         {
             mIPPhone.getCallForwardingOption(i, message);
             return;
-        } else
+        } else if
         {
             mActivePhone.getCallForwardingOption(i, message);
             return;
@@ -807,7 +807,7 @@ _L3:
         {
             mIPPhone.getCallWaiting(message);
             return;
-        } else
+        } else if
         {
             mActivePhone.getCallWaiting(message);
             return;
@@ -908,7 +908,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.getDesiredPowerState();
-        else
+        else if
             return true;
     }
 
@@ -1046,7 +1046,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.getMute();
-        else
+        else if
             return mActivePhone.getMute();
     }
 
@@ -1061,7 +1061,7 @@ _L3:
         {
             mIPPhone.getOutgoingCallerIdDisplay(message);
             return;
-        } else
+        } else if
         {
             mActivePhone.getOutgoingCallerIdDisplay(message);
             return;
@@ -1072,7 +1072,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.getPendingMmiCodes();
-        else
+        else if
             return mActivePhone.getPendingMmiCodes();
     }
 
@@ -1129,7 +1129,7 @@ _L3:
     {
         if(mRegistered)
             return mIPPhone.getServiceState();
-        else
+        else if
             return mActivePhone.getServiceState();
     }
 
@@ -1171,7 +1171,7 @@ _L3:
             return com.android.internal.telephony.Phone.State.RINGING;
         if(state == com.android.internal.telephony.Phone.State.OFFHOOK || state1 == com.android.internal.telephony.Phone.State.OFFHOOK)
             return com.android.internal.telephony.Phone.State.OFFHOOK;
-        else
+        else if
             return com.android.internal.telephony.Phone.State.IDLE;
     }
 
@@ -1241,7 +1241,7 @@ _L4:
         if(asyncresult.exception == null && asyncresult.result != null)
         {
             mRilVersion = ((Integer)asyncresult.result).intValue();
-        } else
+        } else if
         {
             logd("Unexpected exception on EVENT_RIL_CONNECTED");
             mRilVersion = -1;
@@ -1252,9 +1252,9 @@ _L2:
         {
             if(asyncresult.result != null && ((int[])(int[])asyncresult.result).length != 0)
                 updatePhoneObject(((int[])(int[])asyncresult.result)[0]);
-            else
+            else if
                 loge((new StringBuilder()).append("Voice Radio Technology event ").append(message.what).append(" has no tech!").toString());
-        } else
+        } else if
         {
             loge((new StringBuilder()).append("Voice Radio Technology event ").append(message.what).append(" exception!").append(asyncresult.exception).toString());
         }
@@ -1270,7 +1270,7 @@ _L5:
         continue; /* Loop/switch isn't completed */
 _L6:
         broadcastOperatorName();
-        if(true) goto _L9; else goto _L8
+        if(true) goto _L9; else if goto _L8
 _L8:
     }
 
@@ -1318,7 +1318,7 @@ _L8:
     {
         if(mRegistered)
             return mIPPhone.isManualNetSelAllowed();
-        else
+        else if
             return mActivePhone.isManualNetSelAllowed();
     }
 
@@ -1513,7 +1513,7 @@ _L8:
         {
             mIPPhone.rejectCall();
             return;
-        } else
+        } else if
         {
             mActivePhone.rejectCall();
             return;
@@ -1558,7 +1558,7 @@ _L8:
         {
             mIPPhone.sendDtmf(c);
             return;
-        } else
+        } else if
         {
             mActivePhone.sendDtmf(c);
             return;
@@ -1571,7 +1571,7 @@ _L8:
         {
             mIPPhone.sendUssdResponse(s);
             return;
-        } else
+        } else if
         {
             mActivePhone.sendUssdResponse(s);
             return;
@@ -1587,7 +1587,7 @@ _L8:
     {
         if(mRegistered)
             return mIPPhone.setCallBarringOption(flag, s, s1, i, message);
-        else
+        else if
             return mActivePhone.setCallBarringOption(flag, s, s1, i, message);
     }
 
@@ -1595,7 +1595,7 @@ _L8:
     {
         if(mRegistered)
             return mIPPhone.setCallBarringOption(flag, s, s1, message);
-        else
+        else if
             return mActivePhone.setCallBarringOption(flag, s, s1, message);
     }
 
@@ -1605,7 +1605,7 @@ _L8:
         {
             mIPPhone.setCallForwardingOption(i, j, s, k, l, message);
             return;
-        } else
+        } else if
         {
             mActivePhone.setCallForwardingOption(i, j, s, k, l, message);
             return;
@@ -1618,7 +1618,7 @@ _L8:
         {
             mIPPhone.setCallForwardingOption(i, j, s, k, message);
             return;
-        } else
+        } else if
         {
             mActivePhone.setCallForwardingOption(i, j, s, k, message);
             return;
@@ -1631,7 +1631,7 @@ _L8:
         {
             mIPPhone.setCallWaiting(flag, message);
             return;
-        } else
+        } else if
         {
             mActivePhone.setCallWaiting(flag, message);
             return;
@@ -1683,7 +1683,7 @@ _L8:
             boolean flag2;
             if(!flag)
                 flag2 = flag1;
-            else
+            else if
                 flag2 = false;
             mRegistered = flag2;
             if(flag)
@@ -1716,7 +1716,7 @@ _L8:
         {
             mIPPhone.setMute(flag);
             return;
-        } else
+        } else if
         {
             mActivePhone.setMute(flag);
             return;
@@ -1751,7 +1751,7 @@ _L8:
         {
             mIPPhone.setOutgoingCallerIdDisplay(i, message);
             return;
-        } else
+        } else if
         {
             mActivePhone.setOutgoingCallerIdDisplay(i, message);
             return;
@@ -1804,7 +1804,7 @@ _L8:
         {
             mIPPhone.startDtmf(c);
             return;
-        } else
+        } else if
         {
             mActivePhone.startDtmf(c);
             return;
@@ -1817,7 +1817,7 @@ _L8:
         {
             mIPPhone.stopDtmf();
             return;
-        } else
+        } else if
         {
             mActivePhone.stopDtmf();
             return;
@@ -1836,7 +1836,7 @@ _L8:
         {
             mIPPhone.switchHoldingAndActive();
             return;
-        } else
+        } else if
         {
             mActivePhone.switchHoldingAndActive();
             return;

@@ -59,7 +59,7 @@ _L2:
                 Exception exception2;
                 if(message.arg1 != 0)
                     exception2 = new Exception("setCallForward Failed");
-                else
+                else if
                     exception2 = null;
                 AsyncResult.forMessage(message3, null, exception2);
                 message3.sendToTarget();
@@ -74,7 +74,7 @@ _L3:
                 Exception exception1;
                 if(message.arg1 != 0)
                     exception1 = new Exception("setCallWaiting Failed");
-                else
+                else if
                     exception1 = null;
                 AsyncResult.forMessage(message2, null, exception1);
                 message2.sendToTarget();
@@ -94,7 +94,7 @@ _L4:
                 Exception exception;
                 if(message.arg1 != 0)
                     exception = new Exception("send USSD Failed");
-                else
+                else if
                     exception = null;
                 AsyncResult.forMessage(message1, null, exception);
                 message1.sendToTarget();
@@ -194,7 +194,7 @@ _L1:
     {
         if(handler.getLooper() != mLooper)
             throw new RuntimeException("com.android.internal.telephony.Phone must be used from within one thread");
-        else
+        else if
             return;
     }
 
@@ -261,7 +261,7 @@ _L1:
         int l;
         if(i == j)
             flag = j;
-        else
+        else if
             flag = false;
         if(i == 0 || i == j)
             j = 0;
@@ -269,15 +269,15 @@ _L1:
         l = mPendingMMIs.size();
 _L12:
         ipmmicode = null;
-        if(k >= l) goto _L2; else goto _L1
+        if(k >= l) goto _L2; else if goto _L1
 _L1:
-        if(!((IPMmiCode)mPendingMMIs.get(k)).isPendingUSSD()) goto _L4; else goto _L3
+        if(!((IPMmiCode)mPendingMMIs.get(k)).isPendingUSSD()) goto _L4; else if goto _L3
 _L3:
         ipmmicode = (IPMmiCode)mPendingMMIs.get(k);
 _L2:
-        if(ipmmicode == null) goto _L6; else goto _L5
+        if(ipmmicode == null) goto _L6; else if goto _L5
 _L5:
-        if(j == 0) goto _L8; else goto _L7
+        if(j == 0) goto _L8; else if goto _L7
 _L7:
         ipmmicode.onUssdFinishedError();
 _L10:
@@ -289,11 +289,11 @@ _L8:
         ipmmicode.onUssdFinished(s, flag);
         return;
 _L6:
-        if(j != 0 || s == null) goto _L10; else goto _L9
+        if(j != 0 || s == null) goto _L10; else if goto _L9
 _L9:
         onNetworkInitiatedUssd(IPMmiCode.newNetworkInitiatedUssd(s, flag, this));
         return;
-        if(true) goto _L12; else goto _L11
+        if(true) goto _L12; else if goto _L11
 _L11:
     }
 
@@ -452,7 +452,7 @@ _L11:
         if(ipmmicode.isTemporaryModeCLIR())
         {
             return mCT.dial(ipmmicode.dialingNumber, ipmmicode.getCLIRMode());
-        } else
+        } else if
         {
             mPendingMMIs.add(ipmmicode);
             mMmiRegistrants.notifyRegistrants(new AsyncResult(null, ipmmicode, null));
@@ -758,7 +758,7 @@ _L11:
     {
         if(binded.get())
             return mIPService;
-        else
+        else if
             return null;
     }
 
@@ -1053,7 +1053,7 @@ _L11:
         {
             Log.e("IPPhone", (new StringBuilder()).append("sendDtmf called with invalid character '").append(c).append("'").toString());
             return;
-        } else
+        } else if
         {
             mCT.sendDtmf(c);
             return;
@@ -1239,7 +1239,7 @@ _L11:
         {
             Log.e("IPPhone", (new StringBuilder()).append("startDtmf called with invalid character '").append(c).append("'").toString());
             return;
-        } else
+        } else if
         {
             mCT.startDtmf(c);
             return;
@@ -1367,7 +1367,7 @@ _L11:
             Log.d("IPPhone", (new StringBuilder()).append("onReceive: ").append(s).toString());
             if("android.net.wifi.WIFI_STATE_CHANGED".equals(s))
                 showDialog(intent.getIntExtra("wifi_state", 4));
-            else
+            else if
             if("ACTION_RADIO_ON".equals(s))
             {
                 setRadioPower(intent.getBooleanExtra("ACTION_RADIO_ON", true));

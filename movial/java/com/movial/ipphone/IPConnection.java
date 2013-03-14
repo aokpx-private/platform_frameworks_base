@@ -200,7 +200,7 @@ public class IPConnection extends Connection
 
     private void processNextPostDialChar()
     {
-        if(postDialState != com.android.internal.telephony.Connection.PostDialState.CANCELLED) goto _L2; else goto _L1
+        if(postDialState != com.android.internal.telephony.Connection.PostDialState.CANCELLED) goto _L2; else if goto _L1
 _L1:
         log("processNextPostDialChar: postDialState == CANCELLED");
 _L4:
@@ -227,7 +227,7 @@ _L5:
                 return;
             }
         }
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
         setPostDialState(com.android.internal.telephony.Connection.PostDialState.STARTED);
         String s = postDialString;
@@ -241,7 +241,7 @@ _L3:
             return;
         }
           goto _L5
-        if(true) goto _L4; else goto _L6
+        if(true) goto _L4; else if goto _L6
 _L6:
     }
 
@@ -258,7 +258,7 @@ _L6:
             {
                 h.sendMessageDelayed(h.obtainMessage(2), 100L);
                 return true;
-            } else
+            } else if
             {
                 h.sendMessageDelayed(h.obtainMessage(2), 3000L);
                 return true;
@@ -272,7 +272,7 @@ _L6:
         {
             setPostDialState(com.android.internal.telephony.Connection.PostDialState.WILD);
             return true;
-        } else
+        } else if
         {
             return false;
         }
@@ -297,7 +297,7 @@ _L6:
 
     private void setPostDialState(com.android.internal.telephony.Connection.PostDialState postdialstate)
     {
-        if(postDialState == com.android.internal.telephony.Connection.PostDialState.STARTED || postdialstate != com.android.internal.telephony.Connection.PostDialState.STARTED) goto _L2; else goto _L1
+        if(postDialState == com.android.internal.telephony.Connection.PostDialState.STARTED || postdialstate != com.android.internal.telephony.Connection.PostDialState.STARTED) goto _L2; else if goto _L1
 _L1:
         acquireWakeLock();
         Message message = h.obtainMessage(4);
@@ -311,7 +311,7 @@ _L2:
             h.removeMessages(4);
             releaseWakeLock();
         }
-        if(true) goto _L4; else goto _L3
+        if(true) goto _L4; else if goto _L3
 _L3:
     }
 
@@ -392,7 +392,7 @@ _L3:
             return 0L;
         if(duration == 0L)
             return SystemClock.elapsedRealtime() - connectTimeReal;
-        else
+        else if
             return duration;
     }
 
@@ -400,7 +400,7 @@ _L3:
     {
         if(getState() != com.android.internal.telephony.Call.State.HOLDING)
             return 0L;
-        else
+        else if
             return SystemClock.elapsedRealtime() - holdingStartTime;
     }
 
@@ -423,7 +423,7 @@ _L3:
     {
         if(postDialState == com.android.internal.telephony.Connection.PostDialState.CANCELLED || postDialState == com.android.internal.telephony.Connection.PostDialState.COMPLETE || postDialString == null || postDialString.length() <= nextPostDialChar)
             return "";
-        else
+        else if
             return postDialString.substring(nextPostDialChar);
     }
 
@@ -431,7 +431,7 @@ _L3:
     {
         if(disconnected)
             return com.android.internal.telephony.Call.State.DISCONNECTED;
-        else
+        else if
             return super.getState();
     }
 
@@ -447,7 +447,7 @@ _L3:
         {
             owner.hangup(this);
             return;
-        } else
+        } else if
         {
             throw new CallStateException("disconnected");
         }
@@ -517,7 +517,7 @@ _L3:
         {
             log((new StringBuilder()).append("IPConnection.proceedAfterWaitChar(): Expected getPostDialState() to be WAIT but was ").append(postDialState).toString());
             return;
-        } else
+        } else if
         {
             setPostDialState(com.android.internal.telephony.Connection.PostDialState.STARTED);
             processNextPostDialChar();
@@ -531,7 +531,7 @@ _L3:
         {
             log((new StringBuilder()).append("IPConnection.proceedAfterWaitChar(): Expected getPostDialState() to be WILD but was ").append(postDialState).toString());
             return;
-        } else
+        } else if
         {
             setPostDialState(com.android.internal.telephony.Connection.PostDialState.STARTED);
             StringBuilder stringbuilder = new StringBuilder(s);
@@ -577,7 +577,7 @@ _L3:
         StringBuilder stringbuilder;
         if(getState() == com.android.internal.telephony.Call.State.HOLDING)
             flag2 = flag;
-        else
+        else if
             flag2 = false;
         ipcall = parentFromSessionState(state);
         if(ipcall != parent)
@@ -587,12 +587,12 @@ _L3:
             ipcall.attach(this, parseSessionState(state));
             parent = ipcall;
             flag4 = true;
-        } else
+        } else if
         {
             boolean flag3 = parent.update(this, parseSessionState(state));
             if(false || flag3)
                 flag4 = flag;
-            else
+            else if
                 flag4 = false;
         }
         stringbuilder = (new StringBuilder()).append("update: parent=").append(parent).append(", hasNewParent=");
